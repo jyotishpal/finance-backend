@@ -22,3 +22,22 @@ exports.getSummary = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
+exports.monthlyReport = async (req, res) => {
+    try {
+        const data = await Record.aggregate([
+            {
+                $group: {
+                    _id: { $month: "$date" },
+                    total: { $sum: "$amount" }
+                }
+            },
+            {
+                $sort: { "_id": 1 }
+            }
+        ]);
+
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};

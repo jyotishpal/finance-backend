@@ -81,19 +81,3 @@ exports.getRecords = async (req, res) => {
     }
 };
 
-exports.monthlyReport = async (req, res) => {
-    try {
-        const data = await Record.aggregate([
-            {
-                $group: {
-                    _id: { $month: "$date" },
-                    total: { $sum: "$amount" }
-                }
-            }
-        ]);
-
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
-};

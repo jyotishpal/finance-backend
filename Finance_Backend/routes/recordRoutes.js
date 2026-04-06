@@ -8,7 +8,7 @@ const {
     updateRecord,
     deleteRecord,
      filterRecords,
-     monthlyReport
+     
 } = require("../controllers/recordController");
 
 router.post("/", auth, role("admin"), createRecord);
@@ -16,5 +16,5 @@ router.get("/", auth, getRecords);
 router.put("/:id", auth, role("admin"), updateRecord);
 router.delete("/:id", auth, role("admin"), deleteRecord);
 router.get("/filter", auth, filterRecords);
-router.get("/monthly", auth, role("admin","analyst"), monthlyReport);
+
 module.exports = router;
